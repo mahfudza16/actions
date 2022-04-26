@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.TESTING }}
+          token: ${{ secrets.MYSECRET }}
           repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
           ref: ${{ github.event.client_payload.pull_request.head.ref }}
           fetch-depth: 0
@@ -24,13 +24,13 @@ jobs:
       - name: Rebase
         uses: peter-evans/rebase@v1
         with:
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.MYSECRET }}
           repository: ${{ github.event.client_payload.pull_request.base.repo.full_name }}
 
       - name: Comment
         uses: peter-evans/create-or-update-comment@v1
         with:
-          token: ${{ secrets.TESTING }}
+          token: ${{ secrets.MYSECRET }}
           repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
           comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
           body: |
